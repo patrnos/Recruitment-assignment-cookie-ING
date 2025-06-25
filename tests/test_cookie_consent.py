@@ -8,7 +8,7 @@ def test_scenario_with_analytics_consent(page: Page):
     """
     print("\n--- Test ze zgodą na analitykę ---")
     
-    page.goto("https://www.ing.pl/", timeout=60000)
+    page.goto("https://www.ing.pl/")
     page.get_by_role("button", name="Dostosuj").click()
     page.get_by_role("switch", name="Cookies analityczne").locator("span").first.click()
     page.get_by_role("button", name="Zaakceptuj zaznaczone").click()
@@ -21,7 +21,7 @@ def test_scenario_with_analytics_consent(page: Page):
     
     # Asercje wartości cookie
     assert gdpr_cookie is not None, "Nie znaleziono ciasteczka cookiePolicyGDPR"
-    assert gdpr_cookie['value'] == "1", f"Oczekiwano wartości '3', otrzymano '{gdpr_cookie['value']}'"
+    assert gdpr_cookie['value'] == "3", f"Oczekiwano wartości '3', otrzymano '{gdpr_cookie['value']}'"
     
     print(f"Sukces: cookiePolicyGDPR = {gdpr_cookie['value']} (analityczne zaakceptowane)")
     
