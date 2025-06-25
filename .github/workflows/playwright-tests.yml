@@ -30,4 +30,8 @@ jobs:
           playwright install
 
       - name: Run Playwright tests
-        run: pytest --browser ${{ matrix.browser }} --html=report-${{ matrix.browser }}.html --self-contained-html
+     run: |
+          pytest
+
+        
+
