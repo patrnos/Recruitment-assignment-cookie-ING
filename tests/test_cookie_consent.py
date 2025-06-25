@@ -5,25 +5,7 @@ def test_scenario_with_analytics_consent(page: Page):
     page.goto("https://www.ing.pl/")
 
     # Sprawdzenie i próba kliknięcia "Dostosuj" (tylko tutaj if/try)
-    hcaptcha_iframe = page.get_by_role("checkbox", name="hCaptcha checkbox with text '")
-    if hcaptcha_iframe.is_visible(timeout=500):
-        print("Wykryto hCaptcha – próbuję kliknąć 'I am human'...")
-        try:
-            page.page.get_by_role("checkbox", name="hCaptcha checkbox with text '").click()
-        except Exception as e:
-            print(f"Nie udało się kliknąć hCaptcha: {e}")
-
-        try:
-            expect(page.get_by_role("button", name="Dostosuj")).to_be_visible(timeout=500)
-            print("Przycisk 'Dostosuj' po hCaptcha jest widoczny.")
-        except Exception:
-            print("Nie znaleziono przycisku 'Dostosuj' po hCaptcha.")
-    else:
-        try:
-            expect(page.get_by_role("button", name="Dostosuj")).to_be_visible(timeout=500)
-            print("Przycisk 'Dostosuj' jest widoczny.")
-        except Exception:
-            print("Nie znaleziono przycisku 'Dostosuj'.")
+    page.get_by_role("checkbox", name="hCaptcha checkbox with text '").click()
 
     # Dalsza część testu – bez żadnych if/try/except
     page.get_by_role("button", name="Dostosuj").click()
