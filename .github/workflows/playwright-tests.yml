@@ -27,15 +27,15 @@ jobs:
 
       - name: Install Playwright browsers
         run: |
-          playwright install
+          playwright install ${{ matrix.browser }}
 
       - name: Run Playwright tests
         run: |
-          pytest --browser chromium --browser firefox --browser webkit
+          pytest --browser ${{ matrix.browser }}
 
       - name: Upload Playwright report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: playwright-report
+          name: playwright-report-${{ matrix.browser }}
           path: playwright-report/
