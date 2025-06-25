@@ -5,11 +5,11 @@ def test_scenario_with_analytics_consent(page: Page):
     page.goto("https://www.ing.pl/")
 
     # Sprawdzenie i próba kliknięcia "Dostosuj" (tylko tutaj if/try)
-    hcaptcha_iframe = page.locator("iframe[title*='hCaptcha']")
+    hcaptcha_iframe = page.get_by_role("checkbox", name="hCaptcha checkbox with text '")
     if hcaptcha_iframe.is_visible(timeout=500):
         print("Wykryto hCaptcha – próbuję kliknąć 'I am human'...")
         try:
-            page.frame_locator("iframe[title*='hCaptcha']").locator("#anchor").click()
+            page.page.get_by_role("checkbox", name="hCaptcha checkbox with text '").click()
         except Exception as e:
             print(f"Nie udało się kliknąć hCaptcha: {e}")
 
