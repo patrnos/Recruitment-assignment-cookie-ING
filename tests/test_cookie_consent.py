@@ -6,29 +6,40 @@ def test_scenario_with_analytics_consent(page: Page):
     wartość cookiePolicyGDPR wynosi 3.
     """
     print("\n--- Test ze zgodą na analitykę ---")
-    
+
     page.goto("https://www.ing.pl/")
-    
-    try:
-        expect(page.get_by_role("button", name="Dostosuj")).to_be_visible(timeout=1000)
-    except TimeoutError:
+
+    def is_dostosuj_visible(timeout_ms=1000) -> bool:
         try:
-            # Kliknięcie checkboxa hCaptcha wewnątrz iframe
+            expect(page.get_by_role("button", name="Dostosuj")).to_be_visible(timeout=timeout_ms)
+            return True
+        except TimeoutError:
+            return False
+
+    # 1. Sprawdź czy "Dostosuj" widoczny
+    if not is_dostosuj_visible():
+        print("Przycisk 'Dostosuj' nie jest widoczny – próbuję kliknąć w hCaptcha...")
+
+        try:
+            # 2. Kliknij hCaptcha
             hcaptcha_frame = page.frame_locator("iframe[title='Widget containing checkbox for hCaptcha security challenge']")
             hcaptcha_frame.locator("#anchor").click()
-    
+            print("Kliknięto w hCaptcha.")
         except Exception as e:
-    
-            expect(page.get_by_role("button", name="Dostosuj")).to_be_visible(timeout=1000)
+            print(f"Błąd podczas klikania w hCaptcha: {e}")
 
-    # Kliknięcie w "Dostosuj"
+        # 3. Ponownie sprawdź, czy "Dostosuj" się pojawił
+        if not is_dostosuj_visible():
+            raise AssertionError("Przycisk 'Dostosuj' nadal niewidoczny po próbie kliknięcia w hCaptcha.")
+
+    # Kliknij "Dostosuj"
     page.get_by_role("button", name="Dostosuj").click()
 
-    # Zgoda na analityczne cookies
+    # Zaznacz analityczne cookies
     page.get_by_role("switch", name="Cookies analityczne").locator("span").first.click()
     page.get_by_role("button", name="Zaakceptuj zaznaczone").click()
 
-    # Weryfikacja UI - baner powinien zniknąć
+    # Sprawdź, czy baner zniknął
     expect(page.get_by_role("button", name="Zaakceptuj zaznaczone")).to_be_hidden()
 
     # Weryfikacja ciasteczek
