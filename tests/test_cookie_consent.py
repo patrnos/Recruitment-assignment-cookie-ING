@@ -14,5 +14,3 @@ def test_scenario_with_analytics_consent(page: Page):
 
     assert gdpr is not None
     assert gdpr['value'] == "3"
-
-    print(f"Sukces: cookiePolicyGDPR = {gdpr['value']}")
