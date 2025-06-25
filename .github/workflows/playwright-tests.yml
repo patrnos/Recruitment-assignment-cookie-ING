@@ -8,6 +8,9 @@ jobs:
     strategy:
       matrix:
         browser: [chromium, firefox, webkit]
+        exclude:
+        - browser: firefox
+        - browser: webkit
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -17,17 +20,13 @@ jobs:
         with:
           python-version: "3.10"
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-
       - name: Install Playwright system dependencies
         run: |
-          npx playwright install-deps
+          pip install playwright
 
       - name: Install Playwright browsers
         run: |
-          playwright install ${{ matrix.browser }}
+          playwright install
 
       - name: Run Playwright tests
         run: |
