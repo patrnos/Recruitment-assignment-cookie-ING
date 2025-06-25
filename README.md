@@ -34,6 +34,7 @@ pytest
 
 
 - Konkretna przeglądarka:
+  
 pytest --browser chromium
 
 pytest --browser firefox
