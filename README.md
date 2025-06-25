@@ -30,20 +30,20 @@ playwright install
 ## Uruchamianie testów lokalnie
 
 - Domyślnie (chromium):
-pytest
+`pytest`
 
 
 - Konkretna przeglądarka:
   
-pytest --browser chromium
+`pytest --browser chromium`
 
-pytest --browser firefox
+`pytest --browser firefox`
 
-pytest --browser webkit
+`pytest --browser webkit`
 
 
 - Wszystkie przeglądarki równocześnie:
-pytest --browser chromium --browser firefox --browser webkit
+`pytest --browser chromium --browser firefox --browser webkit`
 
 
 
