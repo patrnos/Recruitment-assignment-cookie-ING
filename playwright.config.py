@@ -11,8 +11,8 @@ def page(context: BrowserContext):
     page = context.new_page()
     
     # Zwiększone timeouty
-    page.set_default_timeout(30000) 
-    page.set_default_navigation_timeout(60000)  # 60s dla nawigacji
+    page.set_default_timeout(30000)  
+    page.set_default_navigation_timeout(60000)  
     
     # Włącz śledzenie (trace)
     context.tracing.start(screenshots=True, snapshots=True, sources=True)
