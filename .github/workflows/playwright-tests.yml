@@ -7,10 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        browser: [chromium, firefox, webkit]
-        exclude:
-        - browser: firefox
-        - browser: webkit
+        browser: [chromium]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
