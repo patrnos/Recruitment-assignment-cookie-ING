@@ -31,7 +31,7 @@ jobs:
 
       - name: Run Playwright tests
         run: |
-          pytest --browser ${{ matrix.browser }} 
+          pytest --browser chromium --browser firefox --browser webkit
 
       - name: Upload Playwright report
         if: always()
