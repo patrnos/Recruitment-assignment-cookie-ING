@@ -29,7 +29,7 @@ playwright install
 
 ## Uruchamianie testów lokalnie
 
-- Domyślnie (wszystkie przeglądarki):
+- Domyślnie (chromium):
 pytest
 
 
