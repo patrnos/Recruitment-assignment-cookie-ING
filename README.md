@@ -14,16 +14,16 @@ Automatyczny test sprawdzający obsługę zgody na cookie analityczne na stronie
 python -m venv venv
 
 Windows:
-venv\Scripts\activate
+`venv\Scripts\activate`
 
 macOS/Linux:
-source venv/bin/activate
+`source venv/bin/activate`
 
 
 
 2. Zainstaluj zależności:
-pip install -r requirements.txt
-playwright install
+`pip install -r requirements.txt`
+`playwright install`
 
 
 
