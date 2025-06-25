@@ -9,6 +9,7 @@ def test_scenario_with_analytics_consent(page: Page):
     print("\n--- Test ze zgodą na analitykę ---")
     
     page.goto("https://www.ing.pl/")
+    expect(page.get_by_role("button", name="Dostosuj")).to_be_visible()
     page.get_by_role("button", name="Dostosuj").click()
     page.get_by_role("switch", name="Cookies analityczne").locator("span").first.click()
     page.get_by_role("button", name="Zaakceptuj zaznaczone").click()
@@ -24,7 +25,6 @@ def test_scenario_with_analytics_consent(page: Page):
     assert gdpr_cookie['value'] == "3", f"Oczekiwano wartości '3', otrzymano '{gdpr_cookie['value']}'"
     
     print(f"Sukces: cookiePolicyGDPR = {gdpr_cookie['value']} (analityczne zaakceptowane)")
-    browser.close()
     
 
 
