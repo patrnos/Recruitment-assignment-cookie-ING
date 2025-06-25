@@ -24,6 +24,7 @@ def test_scenario_with_analytics_consent(page: Page):
     assert gdpr_cookie['value'] == "3", f"Oczekiwano wartości '3', otrzymano '{gdpr_cookie['value']}'"
     
     print(f"Sukces: cookiePolicyGDPR = {gdpr_cookie['value']} (analityczne zaakceptowane)")
+    browser.close()
     
 
 
